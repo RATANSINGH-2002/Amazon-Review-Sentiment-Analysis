@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<head>
+    <link rel="icon" href="https://img.icons8.com/external-xnimrodx-lineal-gradient-xnimrodx/64/000000/external-computer-science-xnimrodx-lineal-gradient-xnimrodx.png"/>
+    <title>
+        Ecommerce Sentiments Rating
+    </title>
+    <style>
+        body{
+            background-image: linear-gradient( 68.4deg,  #f1faee -0.4%, #a8dadc 100.2% );
+        }
+    </style>
+</head>
+<body>
+    <center>
+            <h1 class="bold">Ecommerce Sentiment Analysis</h1>
+            <p style="font-size: large;">
+                Enter your sample review and click on the below button to predict the rating.
+            </p>
+            <form class="input">
+                <textarea rows = "5" cols = "60" placeholder="Enter Your Reviews..."  name="a" id="a" style="border-radius: 5px; border: 2px; box-shadow:-0.2rem -0.2rem 0.3rem #fff,0.2rem 0.2rem 0.3rem #8686;"></textarea><br>
+                    <input type="button" value="Predict" onclick="SubmitValue()" style="height: 30px; width: 80px; border-radius: 10px;">
+                    <input type="reset" value="Clear" style="height: 30px; width: 80px; border-radius: 10px; margin-left: 20px;"> 
+                    <label id="Data_value" style="font-size: 50px;"></label>
+            </form>
+    </center>
+    <script>
+        function SubmitValue(){
+              var rv = document.getElementById('a').value;
+              fetch('/Predict/'+rv)
+              .then(response => response.json())
+              .then(showData);
+          }
+          function showData(data){
+            console.log(data.pred)
+            document.getElementById("Data_value").innerText=data.pred
+            const pred_val = data.pred 
+            if(pred_val=='1')
+           {
+              document.getElementById("Data_value").innerHTML="<h1>&#128531</h1>"
+            }
+            if(pred_val=='2')
+           {
+            document.getElementById("Data_value").innerHTML="<h1>&#128528;</h1>"
+           }
+           if(pred_val =='3')
+           {
+            document.getElementById("Data_value").innerHTML="<h1>&#128529;</h1>"
+           }
+            
+          if(pred_val =='4')
+          {
+           document.getElementById("Data_value").innerHTML="<h1>&#128524;</h1>"
+          }
+          if(pred_val =='5')
+          {
+           document.getElementById("Data_value").innerHTML="<h1>&#128512;</h1>"
+          }   
+         }
+      </script>
+</body>
+
+</html>
